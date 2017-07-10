@@ -1,0 +1,65 @@
+version: "2"
+
+services:
+
+  apache:
+    image: eeacms/apache:2.4-1.0
+    ports:
+    - "80:80"
+    labels:
+      io.rancher.scheduler.affinity:host_label_ne: reserved=yes
+    environment:
+      SERVER_ADMIN: "helpdesk@biodiversity.europa.eu"
+      SERVER_NAME: "biodiversity-test.europa.eu"
+      RewriteRule: "^/(.*) http://plone:8080/VirtualHostBase/http/biodiversity-test.europa.eu:80/Plone/VirtualHostRoot/$$1 [P,L]"
+      TZ: "Europe/Copenhagen"
+
+  plone:
+    # image: 
+    # build: ./devel/
+    build: .
+    labels:
+      io.rancher.scheduler.affinity:host_label_ne: reserved=yes
+    depends_on:
+    - zeoserver
+    - memcached
+    environment:
+      ZOPE_MODE: "zeo_client"
+      TZ: "Europe/Copenhagen"
+    volumes:
+    - bise-downloads:/data/downloads
+    - bise-plone-data:/data
+    - ./src:/plone/instance/src/
+    - ./buildout.cfg:/plone/instance/buildout.cfg
+    ports:
+      - "8190:8080"
+    # command: bash -c "tail -f /dev/null"
+
+  memcached:
+    image: memcached:1.4.35
+    labels:
+      io.rancher.scheduler.affinity:host_label_ne: reserved=yes
+    environment:
+      TZ: "Europe/Copenhagen"
+    command:
+    - "-m"
+    - "2048"
+
+  zeoserver:
+    image: plone:4.3.10
+    labels:
+      io.rancher.scheduler.affinity:host_label_ne: reserved=yes
+    environment:
+      TZ: "Europe/Copenhagen"
+    command:
+    - zeoserver
+    volumes:
+    - bise-data:/data
+    # command: bash -c "tail -f /dev/null"
+
+
+volumes:
+  bise-plone-data:
+  bise-async-data:
+  bise-data:
+  bise-downloads:
