@@ -1,4 +1,4 @@
-FROM eeacms/kgs:12.0
+FROM eeacms/kgs:12.4
 MAINTAINER "EEA: IDM2 S-Team"
 
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils \ 
