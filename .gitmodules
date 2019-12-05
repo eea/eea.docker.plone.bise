@@ -1,0 +1,4 @@
+[submodule "frontend"]
+	path = frontend
+	url = git@github.com:eea/forests-frontend.git
+  ignore = dirty

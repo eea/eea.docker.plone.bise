@@ -1,0 +1,50 @@
+version: "2.1"
+
+services:
+
+  plone:
+    image: "${BACKEND_IMAGE:?no such variable}"
+    labels:
+      io.rancher.scheduler.affinity:host_label_ne: reserved=yes
+    depends_on:
+      - zeo
+      - memcached
+    ports:
+      - "${BACKEND_PORT:-8085}:8080"
+    environment:
+      TZ: "Europe/Copenhagen"
+      ZEO_ADDRESS: "zeo:8080"
+      ZOPE_MODE: "zeo_client"
+    entrypoint: sh -c "tail -f /dev/null"
+
+  frontend:
+    image: "${FRONTEND_IMAGE:?no such variable}"
+    environment:
+      RAZZLE_API_PATH: "http://localhost:${BACKEND_PORT}/${SITE_NAME:-Plone}"
+      RAZZLE_INTERNAL_API_PATH: "http://plone:8080/${SITE_NAME:-Plone}"
+      PORT: "${FRONTEND_PORT:-3000}"
+    ports:
+      - "${FRONTEND_PORT:-3000}:${FRONTEND_PORT:-3000}"
+      - "${FRONTEND_PORT_NEXT:-3001}:${FRONTEND_PORT_NEXT:-3001}"
+      - "${FRONTEND_ANALYZE_PORT:-8888}:${FRONTEND_ANALYZE_PORT:-8888}"
+    entrypoint: sh -c "tail -f /dev/null"
+
+  zeo:
+    image: plone:5.2-python2
+    labels:
+      io.rancher.scheduler.affinity:host_label_ne: reserved=yes
+    environment:
+      TZ: "Europe/Copenhagen"
+      ZOPE_MODE: "zeo"
+    command:
+      - zeo
+
+  memcached:
+    image: memcached:1.4.35
+    labels:
+      io.rancher.scheduler.affinity:host_label_ne: reserved=yes
+    environment:
+      TZ: "Europe/Copenhagen"
+    command:
+      - "-m"
+      - "2048"
