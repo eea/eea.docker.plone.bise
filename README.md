@@ -1,3 +1,5 @@
+# Use production branch for releases!
+
 # BISE Plone Image (based on EEA KGS)
 
 ## Base docker image
