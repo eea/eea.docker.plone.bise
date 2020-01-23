@@ -4,7 +4,7 @@
 
 ### Base docker image
 
- - [hub.docker.com](https://hub.docker.com/r/ipetchesi/eea.docker.plone.bise)
+ - [hub.docker.com](https://hub.docker.com/r/eeacms/eea.docker.plone.bise)
 
 ### Source code
 
