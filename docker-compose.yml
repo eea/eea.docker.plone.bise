@@ -30,7 +30,7 @@ services:
     entrypoint: sh -c "tail -f /dev/null"
 
   zeo:
-    image: plone:5.2-python2
+    image: "${BACKEND_IMAGE:?no such variable}"
     labels:
       io.rancher.scheduler.affinity:host_label_ne: reserved=yes
     environment:
