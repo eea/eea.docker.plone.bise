@@ -1,1 +1,1 @@
-davidsilaghi/bise-plone:5.2-0.13
+eeacms/plonesaas:5.2.0-24

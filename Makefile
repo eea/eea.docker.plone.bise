@@ -7,6 +7,8 @@ SHELL := /bin/bash
 image-name-split = $(firstword $(subst :, ,$1))
 
 SKELETON := "https://github.com/eea/plone5-fullstack-skeleton.git"
+BISE-VOLTO-P5 := "https://github.com/eea/eea.docker.plone.bise.git"
+FISE-VOLTO-P5 := "https://github.com/eea/eea.docker.plone.fise.git"
 
 # identify project folders
 BACKEND := backend
@@ -50,6 +52,14 @@ endif
 	@rm -rf ./.skel
 	@git clone ${SKELETON} .skel
 
+.bise-p5:
+	@rm -rf ./.bise-p5
+	@git clone ${BISE-VOLTO-P5} .bise-p5
+
+.fise-p5:
+	@rm -rf ./.fise-p5
+	@git clone ${FISE-VOLTO-P5} .fise-p5
+
 .PHONY: plone_override
 plone_override:.skel
 	@if [ -z "$(HAS_PLONE_OVERRIDE)" ]; then \
@@ -84,7 +94,6 @@ frontend-install:		## Activates frontend modules for development
 	@echo "Running frontend-install target"
 	@echo ""
 	docker-compose up -d frontend
-	docker-compose exec frontend npm install mr-developer
 	docker-compose exec frontend npm run develop
 	docker-compose exec frontend make activate-all
 	docker-compose exec frontend npm install
@@ -204,6 +213,12 @@ sync-dockercompose:.skel		## Updates docker-compose.yml to latest github version
 	cp .skel/docker-compose.yml ./
 	rm -rf ./.skel
 
+.PHONY: sync-BISE
+sync-BISE:.bise-p5  ## Updates all files to latest github version of BISE
+
+.PHONY: sync-FISE
+sync-FISE:.fise-p5  ## Updates all files to latest github version of FISE
+
 .PHONY: shell
 shell:		## Starts a shell with proper env set
 	$(SHELL)
@@ -212,6 +227,10 @@ shell:		## Starts a shell with proper env set
 start-npm-cache:		## Starts the Verdacio NPM cache
 	cd ${FRONTEND}; \
 	PATH=$(HOME)/.node_modules/bin:$(PATH) verdaccio -l 0.0.0.0:4873 -c verdaccio-config.yaml
+
+.PHONY: test-frontend-image
+test-frontend-image:		## Try the frontend image separately
+	docker run --rm -it -p $(FRONTEND_PORT):$(FRONTEND_PORT) --user node $(FRONTEND_IMAGE_NAME) bash
 
 .PHONY: help
 help:		## Show this help.
