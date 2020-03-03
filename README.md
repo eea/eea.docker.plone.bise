@@ -1,13 +1,20 @@
-# BISE Plone Image (based on EEA KGS)
+# Quick links for BISE website:
 
-## Base docker image
+- Orchestration: https://github.com/eea/eea.docker.plone.bise#branch=volto-plone5
+- Demo website: https://demo-bise.eea.europa.eu
+- New Volto-based frontend: https://github.com/eea/bise-frontend
+- Taskman project: https://taskman.eionet.europa.eu/projects/biodiversity
 
- - [hub.docker.com](https://hub.docker.com/r/ipetchesi/eea.docker.plone.bise)
+## Quickstart for development
 
-## Source code
+Welcome to your new stack. Run ``make help`` to see what you can do.
 
-  - [github.com](https://github.com/eea/eea.docker.plone.bise)
+Ideally you will run ``make setup-fullstack-dev`` then ``make start-plone``,
+create a new Plone site and activate eea.restapi product. Then run ``make
+volto-shell``. Inside the frontend container run ``yarn start`` to start Volto.
 
-## Installation and usage
+### Setting up for backend developers
+- Run ``make setup-backend-dev``
 
-See [BISE Orchestration]()
+### Setting up for frontend developers
+Run ```make setup-frontend-dev``
