@@ -1,1 +1,1 @@
-eeacms/plonesaas:5.2.0-24
+eeacms/plonesaas:5.2.1-16
