@@ -1,16 +1,4 @@
-FROM plone:5.2-python2
+FROM eeacms/plonesaas:5.2.1-18
 
-LABEL maintainer="Tiberiu Ichim <tiberiu.ichim@gmail.com>"
-
-RUN buildDeps="build-essential libldap2-dev libsasl2-dev libssl-dev git vim" \
-               && apt-get update \
-               && apt-get install -y --no-install-recommends $buildDeps
-
-COPY docker-image.txt /
-COPY site.cfg /plone/instance/
-
-RUN gosu plone buildout -c site.cfg
-RUN gosu plone /docker-initialize.py
-
-ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["start"]
+COPY docker-setup.sh /
+RUN /docker-setup.sh
