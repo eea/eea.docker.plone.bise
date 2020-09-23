@@ -1,1 +1,1 @@
-eeacms/bise-backend:5.2.1-16.09
+eeacms/bise-backend:5.2.1-16.10
