@@ -50,5 +50,21 @@ services:
       - "-m"
       - "2048"
 
+  esclient:
+    build: ./elasticsearch/
+    # image: eeacms/elastic:bise
+    command: # Single node
+          - elasticsearch
+          - -Des.node.data=true
+          - -Des.http.enabled=true
+          - -Des.node.master=true
+          - -Des.node.river=_none_
+          - -Des.transport.tcp.compress=true
+          - -Des.http.max_content_length=100mb
+    ports:
+      - "9200:9200"
+    volumes:
+      - ./snapshots:/snapshots:z
+
 # backend demo-forests-p5-plone
 # http-request set-path /VirtualHostBase/https/demo-forests-p5.eea.europa.eu:443/fise/VirtualHostRoot/_vh_api/%[path,regsub(\/api,,g)]
