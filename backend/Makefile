@@ -18,7 +18,7 @@ bump:
 .PHONY: build-image
 build-image:
 	@echo "Building new docker image: $(IMAGE)";
-	docker build . -t "$(IMAGE)";
+	docker build --no-cache . -t "$(IMAGE)";
 	@echo "Image built."
 
 .PHONY: push
