@@ -144,6 +144,7 @@ start-volto-production:docker-compose.override.yml		## Start the frontend servic
 .PHONY: volto-shell
 volto-shell:docker-compose.override.yml		## Start a shell on the frontend service
 	docker-compose up -d frontend
+	docker-compose exec frontend yarn policies set-version 1.18.0
 	docker-compose exec frontend bash
 
 .PHONY: plone-shell
