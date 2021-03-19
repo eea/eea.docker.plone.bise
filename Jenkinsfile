@@ -18,7 +18,7 @@ pipeline {
           withCredentials([string(credentialsId: 'eea-jenkins-token', variable: 'GITHUB_TOKEN')]) {
            //remove starting v from version if it exists
            def version = "${BRANCH_NAME}" - ~/^v/
-           sh '''docker pull eeacms/gitflow; docker run -i --rm --name="${BUILD_TAG}-release" -e GIT_TOKEN="${GITHUB_TOKEN}" -e RANCHER_CATALOG_PATH="${template}" -e DOCKER_IMAGEVERSION="${version}" -e DOCKER_IMAGENAME="${registry}" --entrypoint /add_rancher_catalog_entry.sh eeacms/gitflow'''
+           sh '''docker pull eeacms/gitflow; docker run -i --rm --name="${BUILD_TAG}-release" -e GIT_TOKEN="${GITHUB_TOKEN}" -e RANCHER_CATALOG_PATH="${template}" -e DOCKER_IMAGEVERSION="${BRANCH_NAME}" -e RANCHER_CATALOG_VERSION="${version}" -e DOCKER_IMAGENAME="${BRANCH_NAME}" --entrypoint /add_rancher_catalog_entry.sh eeacms/gitflow'''
          }
         }
       }
