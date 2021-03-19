@@ -5,6 +5,16 @@
 - New Volto-based frontend: https://github.com/eea/bise-frontend
 - Taskman project: https://taskman.eionet.europa.eu/projects/biodiversity
 
+## Releases
+
+#### frontend (Volto)
+
+The frontend service docker image is automatically created when tagging this repo: https://github.com/eea/bise-frontend The docker image is updated here: https://github.com/eea/eea.rancher.catalog/tree/master/templates/volto-bise and here: https://ci.eionet.europa.eu/view/Github/job/volto/job/bise-frontend/view/tags/
+
+#### backend (Plone)
+
+Create a tag in this repo, it will build the Docker image. Docker image will be pushed here: https://hub.docker.com/r/eeacms/eea.docker.plone.bise/
+
 ## Quickstart for development
 
 Welcome to your new stack. Run ``make help`` to see what you can do.
