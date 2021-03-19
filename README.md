@@ -13,7 +13,7 @@ The frontend service docker image is automatically created when tagging this rep
 
 #### backend (Plone)
 
-Create a tag in this repo, it will build the Docker image. Docker image will be pushed here: https://hub.docker.com/r/eeacms/eea.docker.plone.bise/ 
+Create a tag in this repo, it will build the Docker image. Docker image will be pushed here: https://hub.docker.com/r/eeacms/eea.docker.plone.bise/ by Jenkins jobs running here: https://ci.eionet.europa.eu/blue/organizations/jenkins/Build_on_tag%2Feea.docker.plone.bise/activity
 
 ## Quickstart for development
 
