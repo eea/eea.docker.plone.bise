@@ -65,6 +65,7 @@ services:
       - "9200:9200"
     volumes:
       - ./snapshots:/snapshots:z
+      - ./es-data:/usr/share/elasticsearch/data
 
 # backend demo-forests-p5-plone
 # http-request set-path /VirtualHostBase/https/demo-forests-p5.eea.europa.eu:443/fise/VirtualHostRoot/_vh_api/%[path,regsub(\/api,,g)]
