@@ -7,14 +7,14 @@ services:
     labels:
       io.rancher.scheduler.affinity:host_label_ne: reserved=yes
     depends_on:
-      - zeo
+      # - zeo
       - memcached
     ports:
       - "${BACKEND_PORT:-8085}:8080"
     environment:
       TZ: "Europe/Copenhagen"
-      ZEO_ADDRESS: "zeo:8080"
-      ZOPE_MODE: "zeo_client"
+      # ZEO_ADDRESS: "zeo:8080"
+      # ZOPE_MODE: "zeo_client"
       CORS_ALLOW_ORIGIN: "http://localhost:${FRONTEND_PORT:-3000}"
     entrypoint: sh -c "tail -f /dev/null"
 
@@ -30,15 +30,15 @@ services:
       - "${FRONTEND_ANALYZE_PORT:-8888}:${FRONTEND_ANALYZE_PORT:-8888}"
     entrypoint: sh -c "tail -f /dev/null"
 
-  zeo:
-    image: "${BACKEND_IMAGE:?no such variable}"
-    labels:
-      io.rancher.scheduler.affinity:host_label_ne: reserved=yes
-    environment:
-      TZ: "Europe/Copenhagen"
-      ZOPE_MODE: "zeo"
-    command:
-      - zeo
+  # zeo:
+  #   image: "${BACKEND_IMAGE:?no such variable}"
+  #   labels:
+  #     io.rancher.scheduler.affinity:host_label_ne: reserved=yes
+  #   environment:
+  #     TZ: "Europe/Copenhagen"
+  #     ZOPE_MODE: "zeo"
+  #   command:
+  #     - zeo
 
   memcached:
     image: memcached:1.4.35

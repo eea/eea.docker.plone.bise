@@ -8,7 +8,6 @@ image-name-split = $(firstword $(subst :, ,$1))
 
 SKELETON := "https://github.com/eea/plone5-fullstack-skeleton.git"
 BISE-VOLTO-P5 := "https://github.com/eea/eea.docker.plone.bise.git"
-FISE-VOLTO-P5 := "https://github.com/eea/eea.docker.plone.fise.git"
 
 # identify project folders
 BACKEND := backend
@@ -58,10 +57,6 @@ endif
 	@rm -rf ./.bise-p5
 	@git clone ${BISE-VOLTO-P5} .bise-p5
 
-.fise-p5:
-	@rm -rf ./.fise-p5
-	@git clone ${FISE-VOLTO-P5} .fise-p5
-
 .PHONY: plone_override
 plone_override:.skel
 	@if [ -z "$(HAS_PLONE_OVERRIDE)" ]; then \
@@ -96,11 +91,9 @@ frontend-install:		## Activates frontend modules for development
 	@echo "Running frontend-install target"
 	@echo ""
 	docker-compose up -d frontend
-	docker-compose exec frontend npm install mrs-developer
-	docker-compose exec frontend npm run develop
-	docker-compose exec frontend make activate-all
-	docker-compose exec frontend npm install
-	docker-compose exec frontend make clean-addons
+	docker-compose exec frontend yarn add mrs-developer
+	docker-compose exec frontend yarn develop
+	docker-compose exec frontend yarn
 
 .PHONY: setup-frontend-dev
 setup-frontend-dev:init-submodules frontend_override frontend-install		## Setup needed for developing the frontend
@@ -144,7 +137,7 @@ start-volto-production:docker-compose.override.yml		## Start the frontend servic
 .PHONY: volto-shell
 volto-shell:docker-compose.override.yml		## Start a shell on the frontend service
 	docker-compose up -d frontend
-	docker-compose exec frontend yarn policies set-version 1.18.0
+# docker-compose exec frontend yarn policies set-version 1.18.0
 	docker-compose exec frontend bash
 
 .PHONY: plone-shell
