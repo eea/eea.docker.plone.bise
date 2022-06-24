@@ -1,0 +1,9 @@
+plone.app.robotframework
+plone.reload
+plone.restapi
+plone.schema
+plone.tiles
+collective.MockMailHost
+collective.taxonomy
+# eea.dexterity.rdfmarshaller
+# eea.restapi

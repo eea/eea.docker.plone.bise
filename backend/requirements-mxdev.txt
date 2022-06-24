@@ -1,0 +1,18 @@
+###############################################################################
+# mxdev combined constraints
+# -c constraints-mxdev.txt
+
+
+###############################################################################
+# mxdev development sources
+-e ./src/bise.content --install-option="--pre"
+-e ./src/bise.country --install-option="--pre"
+-e ./src/eea.api.dataconnector --install-option="--pre"
+-e ./src/eea.restapi --install-option="--pre"
+
+###############################################################################
+# begin requirements from: requirements.txt
+
+
+# end requirements from: requirements.txt
+###############################################################################

@@ -22,6 +22,7 @@ echo "Running buildout -c develop.cfg"
 echo "========================================================================="
 
 buildout -c site.cfg
+pip install -r requirements.txt -c constraints.txt ${PIP_PARAMS}
 
 echo "========================================================================="
 echo "Cleaning up cache..."
