@@ -1,4 +1,4 @@
-FROM eeacms/plonesaas:5.2.4-48
+FROM eeacms/plone:5.2.7-12
 
 COPY site.cfg /plone/instance
 COPY docker-setup.sh /

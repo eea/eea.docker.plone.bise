@@ -1,1 +1,1 @@
-eeacms/bise-backend:v10.0.32
+eeacms/bise-backend:v10.2.0
