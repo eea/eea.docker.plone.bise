@@ -18,7 +18,7 @@ apt-get update
 apt-get install -y --no-install-recommends $runDeps
 
 echo "========================================================================="
-echo "Running buildout -c develop.cfg"
+echo "Running buildout -c site.cfg"
 echo "========================================================================="
 
 buildout -c site.cfg
