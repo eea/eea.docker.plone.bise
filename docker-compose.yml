@@ -15,7 +15,7 @@ services:
       TZ: "Europe/Copenhagen"
       # ZEO_ADDRESS: "zeo:8080"
       # ZOPE_MODE: "zeo_client"
-      CORS_ALLOW_ORIGIN: "http://localhost:${FRONTEND_PORT:-3000}"
+      # CORS_ALLOW_ORIGIN: "http://localhost:${FRONTEND_PORT:-3000}"
     entrypoint: sh -c "tail -f /dev/null"
 
   frontend:
@@ -41,7 +41,7 @@ services:
   #     - zeo
 
   memcached:
-    image: memcached:1.4.35
+    image: memcached:1.5.12
     labels:
       io.rancher.scheduler.affinity:host_label_ne: reserved=yes
     environment:
